@@ -25,7 +25,7 @@ namespace pqt {
 ProQuantization::ProQuantization(uint _dim, uint _p) :
 		d_dim(_dim), d_codeBook(NULL), d_p(_p), d_vl(_dim / _p), d_nClusters(0) {
 
-	cout << "dim, p, vl: " << d_dim << " " << d_p << " " << d_vl << endl;
+	// cout << "dim, p, vl: " << d_dim << " " << d_p << " " << d_vl << endl;
 }
 
 ProQuantization::~ProQuantization() {

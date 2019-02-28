@@ -28,7 +28,7 @@ PerturbationProTree::PerturbationProTree(uint _dim, uint _p, uint _p2) :
 
 	d_dimBits = 7 - 1;
 
-	std::cout << "dimBits " << d_dimBits << std::endl;
+	// std::cout << "dimBits " << d_dimBits << std::endl;
 
 	d_nDBs = 1;
 
