@@ -285,14 +285,14 @@ void PerturbationProTree::createTree(uint _nClusters1, uint _nClusters2,
 	float* pertA;
 	cudaMalloc(&pertA, _N * d_dim * sizeof(float));
 
-	
+
 
 	ProTree::createTree(_nClusters1, _nClusters2, pertA, _N);
 
 	cudaMemcpy(d_multiCodeBook , d_codeBook, _nClusters1 * d_dim * sizeof(float), cudaMemcpyDeviceToDevice);
 	cudaMemcpy(d_multiCodeBook2 , d_codeBook2, _nClusters1 * _nClusters2 * d_dim * sizeof(float), cudaMemcpyDeviceToDevice);
 
-	
+
 
 	checkCudaErrors(cudaDeviceSynchronize());
 
@@ -2574,7 +2574,7 @@ __global__ void selectBinKernelUnsorted(uint* _assign, float* _dists,
 		const uint* _nElemPerBin, uint _Arows, uint _Brows, uint _p, uint _vl,
 		uint _nClusters1, uint _nClusters2, uint _k1, uint _kMax, uint _k,
 		uint _maxTrials, uint _maxOutBin, uint _c1scale, const uint *_distSeq,
-		uint _numDistSeq, uint _distCluster, 
+		uint _numDistSeq, uint _distCluster,
 		uint _nBinsPerDB) {
 
 // instead of the Dijkstra do the brute-force thing
@@ -3781,7 +3781,7 @@ __global__ void getKVectorIDsKernel(uint* _bestIdx, uint* _nVec,
 		const uint* _dbIdx, const uint* _binPrefix, const uint* _binCounts,
 		uint _nDBBins, const float* _Q, const uint* _assignedBins,
 		const uint* _assignedNBins, uint _QN, uint _dim, uint _maxBins, uint _k,
-		uint _maxVecConsider, uint _maxVecOut, 
+		uint _maxVecConsider, uint _maxVecOut,
 		uint _maxNVecPerBin) {
 
 	extern __shared__ float shm[];
@@ -4076,7 +4076,7 @@ __global__ void getKVectorIDsKernelLarge(uint* _bestIdx, uint* _nVec,
 		const uint* _dbIdx, const uint* _binPrefix, const uint* _binCounts,
 		uint _nDBBins, const float* _Q, const uint* _assignedBins,
 		const uint* _assignedNBins, uint _QN, uint _dim, uint _maxBins, uint _k,
-		uint _maxVecConsider, uint _maxVecOut, 
+		uint _maxVecConsider, uint _maxVecOut,
 		uint _maxNVecPerBin) {
 
 	extern __shared__ float shm[];
@@ -4309,7 +4309,7 @@ __global__ void getKVectorIDsKernelFast(uint* _bestIdx, uint* _nVec,
 		const uint* _dbIdx, const uint* _binPrefix, const uint* _binCounts,
 		uint _nDBBins, const float* _Q, const uint* _assignedBins,
 		const uint* _assignedNBins, uint _QN, uint _dim, uint _maxBins, uint _k,
-		uint _maxVecConsider, uint _maxVec, 
+		uint _maxVecConsider, uint _maxVec,
 		uint _maxNVecPerBin) {
 
 	extern __shared__ float shm[];
@@ -6010,7 +6010,7 @@ __global__ void rerankPlusVecKernelFast(float* _bestDist, uint* _bestIdx,
 
 			totalVec = 0;
 		}
-		syncthreads();
+		__syncthreads();
 
 		// loop over the best assigned bins
 		for (int bin = 0; (bin < nBins) && (totalVec < _maxVec); bin++) {
